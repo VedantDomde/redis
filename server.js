@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 // import Redis from 'ioredis';
-import { rateLimit } from 'express-rate-limit';
+// import { rateLimit } from 'express-rate-limit';
 // import { RedisStore } from 'rate-limit-redis';
 import 'dotenv/config';
 
@@ -43,29 +43,29 @@ const Product = mongoose.model('Product', productSchema);
 // ==========================================
 // 🌟 NEW STEP 3: CONFIGURE RATE LIMIT PACKAGE WITH REDIS
 // ==========================================
-const getRouteLimiter = rateLimit({
-    windowMs: 60 * 1000, // 1 Minute ka time window (60 seconds)
-    max: 5, // 1 Minute mein ek IP se MAX 5 requests allow hain
-    message: {
-        success: false,
-        message: "Too many requests! Aap 1 minute mein 5 baar se zyada products load nahi kar sakte. Kripya thoda rukiye."
-    },
-    standardHeaders: true, // `RateLimit-Limit` aur `RateLimit-Remaining` headers response mein bhejega
-    legacyHeaders: false, // Puraane X-RateLimit headers ko disable karega
+// const getRouteLimiter = rateLimit({
+//     windowMs: 60 * 1000, // 1 Minute ka time window (60 seconds)
+//     max: 5, // 1 Minute mein ek IP se MAX 5 requests allow hain
+//     message: {
+//         success: false,
+//         message: "Too many requests! Aap 1 minute mein 5 baar se zyada products load nahi kar sakte. Kripya thoda rukiye."
+//     },
+//     standardHeaders: true, // `RateLimit-Limit` aur `RateLimit-Remaining` headers response mein bhejega
+//     legacyHeaders: false, // Puraane X-RateLimit headers ko disable karega
     
     // Yahan hum package ko bol rahe hain ki saara data hamare Redis Cloud mein save kare
     // store: new RedisStore({
     //     sendCommand: (...args) => redisClient.call(args[0], ...args.slice(1)),
     //     prefix: 'rl-get-products:', // Redis cloud mein key ka naam isse shuru hoga
     // }),
-});
+// });
 
 
 // ==========================================
 // 4. PRACTICAL CACHING ROUTE (GET) WITH RATE LIMIT
 // ==========================================
 // Humne path ke baad 'getRouteLimiter' package wala middleware laga diya hai
-app.get('/api/products', getRouteLimiter, async (req, res) => {
+app.get('/api/products', async (req, res) => {
     const cacheKey = 'products:all';
 
     try {
