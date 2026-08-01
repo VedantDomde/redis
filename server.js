@@ -38,7 +38,7 @@ const Product = mongoose.model('Product', productSchema);
 // redisClient.on('error', (err) => {
 //     console.error('❌ ioredis Connection Error:', err.message);
 // });
-
+//
 
 // ==========================================
 // 🌟 NEW STEP 3: CONFIGURE RATE LIMIT PACKAGE WITH REDIS
