@@ -32,7 +32,9 @@ const Product = mongoose.model('Product', productSchema);
 // ==========================================
 // 2. IOREDIS CONNECTION SETUP
 // ==========================================
-const redisClient = new Redis(process.env.REDIS_URL);
+const redisClient = new Redis(process.env.REDIS_URL, {
+  tls: {}
+}); 
 
 redisClient.on('connect', () => {
     console.log('⚡ Redis Cloud Connected Successfully via ioredis!');
