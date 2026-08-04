@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
 const productSchema = new mongoose.Schema({
     name: String,
     price: Number,
-    Product: String
+    ProductName: String
 });
 const Product = mongoose.model('Product', productSchema);
 
@@ -111,8 +111,8 @@ app.get('/api/products', async (req, res) => {
 // ==========================================
 app.post('/api/products', async (req, res) => {
     try {
-        const { name, price, Product } = req.body;
-        const newUser = await Product.create({ name, price, Product });
+        const { name, price, ProductName } = req.body;
+        const newUser = await Product.create({ name, price, ProductName });
         console.log("createUser", newUser);
         
         // Jab bhi naya product bane, cache clear karo takki GET route fresh data de ske
