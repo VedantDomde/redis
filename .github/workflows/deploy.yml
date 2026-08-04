@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]    # only runs when code lands on main
 
-jobs:
+jobs: 
 
   # ── Job 1: Run tests ─────────────────────────────
   test:
